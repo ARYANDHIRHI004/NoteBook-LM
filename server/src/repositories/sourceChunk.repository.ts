@@ -2,8 +2,19 @@ import { eq } from "drizzle-orm";
 import { db } from "../config/db.js";
 import { sourceChunk } from "../models/source-chunk.models";
 
+export const sourceChunkSelect = {
+    id: true,
+    sourceId: true,
+    index: true,
+    content: true,
+    tokenCount: true,
+    metadata: true,
+    createdAt: true,
+} as const;
+
+export type SourceChunkRecord = typeof sourceChunk.$inferSelect;
+
 export type CreateSourceChunkData = {
-    id: string;
     sourceId: string;
     index: number;
     content: string;

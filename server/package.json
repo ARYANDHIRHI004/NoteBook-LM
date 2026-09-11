@@ -18,12 +18,14 @@
   },
   "type": "module",
   "dependencies": {
+    "@pinecone-database/pinecone": "^9.0.0",
     "better-auth": "^1.7.3",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "express": "^5.2.1",
     "inngest": "^4.20.0",
     "multer": "^2.3.0",
+    "openai": "^7.13.0",
     "pg": "^8.23.0",
     "unpdf": "^1.8.1"
   },

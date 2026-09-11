@@ -1,4 +1,4 @@
-import { test } from "./test.js";
+import { processSource } from "./processSource.js";
 
 
-export const functions = [test];
+export const functions = [processSource];

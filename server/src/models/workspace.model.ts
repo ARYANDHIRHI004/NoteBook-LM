@@ -2,9 +2,10 @@ import { timestamp } from "drizzle-orm/pg-core";
 import { pgTable, text } from "drizzle-orm/pg-core";
 import { user } from "./auth-schema";
 import { relations } from "drizzle-orm";
+import { uuid } from "drizzle-orm/pg-core";
 
 export const workspace = pgTable("worksapce",{
-    id: text("id").primaryKey(),
+     id: uuid("id").primaryKey().defaultRandom(),
     userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     title: text("name").notNull(),
     description: text("description"),

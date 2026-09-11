@@ -1,16 +1,17 @@
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { source } from "./soruce.models";
 import { relations } from "drizzle-orm";
 import { integer } from "drizzle-orm/pg-core";
 import { json } from "drizzle-orm/pg-core";
+import { jsonb } from "drizzle-orm/pg-core";
 
 export const sourceChunk = pgTable("source-chunk", {
-    id: text("id").primaryKey(),
+     id: uuid("id").primaryKey().defaultRandom(),
     sourceId: text("source_id").notNull().references(() => source.id, { onDelete: "cascade" }),
     index: integer("index").notNull(), 
     content: text("content"),
     tokenTount: integer("token_tount"),
-    metadata: json(),
+    metadata: jsonb("metadata"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()

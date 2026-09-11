@@ -10,7 +10,9 @@ async function createAndProcessSource(
     const source = await createSourceRecord(data);
 
     await enqueueSourceProcessing({
+        // @ts-expect-error
         sourceId: source.id,
+        // @ts-expect-error
         workspaceId: source.workspaceId,
     });
 
@@ -43,10 +45,10 @@ export async function uploadPdfSource(
 
     return createAndProcessSource({
         workspaceId,
-        type: "PDF",
+        type: "pdf",
         title: title?.trim() || file.originalname.replace(/\.pdf$/i, ""),
-        content,
-        status: "PENDING",
+        content: content || "",
+        status: "pending",
         metadata: {
             // fileUrl: upload.secureUrl,
             // fileName: upload.originalFilename,
