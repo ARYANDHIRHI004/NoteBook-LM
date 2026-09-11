@@ -15,6 +15,13 @@
       "when": 1789111890783,
       "tag": "0001_gray_taskmaster",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789113330194,
+      "tag": "0002_complete_talon",
+      "breakpoints": true
     }
   ]
 }
