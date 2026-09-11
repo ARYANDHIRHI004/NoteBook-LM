@@ -1,0 +1,1 @@
+ALTER TABLE "source" ALTER COLUMN "type" DROP DEFAULT;

@@ -5,9 +5,11 @@ import { relations } from "drizzle-orm";
 
 export const workspace = pgTable("worksapce",{
     id: text("id").primaryKey(),
+    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     title: text("name").notNull(),
     description: text("description"),
-    userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    icon: text("icon"),
+    defaultModel: text("default_model").default("gpt-3.5-turbo"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
       .defaultNow()

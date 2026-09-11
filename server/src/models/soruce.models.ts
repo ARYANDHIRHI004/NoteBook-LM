@@ -1,14 +1,21 @@
 import { text, pgTable, timestamp, json } from "drizzle-orm/pg-core";
 import { workspace } from "./workspace.model";
 import { relations } from "drizzle-orm";
+import { PgEnumColumn } from "drizzle-orm/pg-core";
+import { pgEnum } from "drizzle-orm/pg-core";
+
+export const SourceStatus  = pgEnum("status", ["pending", "processing", "ready", "failed"]);
+
+export const sourceType = pgEnum("type", ["pdf", "website", "youtube", "text", "markdown"]);
 
 export const source = pgTable("source", {
     id: text("id").primaryKey(),
-    title: text("title").notNull(),
-    description: text("description"),
-    url: text("url"),
     workspaceId: text("workspace_id").notNull().references(() => workspace.id, { onDelete: "cascade" }),
+    type: sourceType("type").notNull(),
+    title: text("title").notNull(),
     content: text("content"),
+    url: text("url"),
+    status: SourceStatus("status").default("pending").notNull(),
     metadata: json(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at")
