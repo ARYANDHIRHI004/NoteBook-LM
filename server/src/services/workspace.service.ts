@@ -1,7 +1,9 @@
 import {
+    deleteWorkspaceById,
   findWorkSpcaceByIdAndUserId,
   findWorkSpcaceByUserId,
   insertWorkspace,
+  updateWorkspaceById,
   type Workspace,
 } from "../repositories/workspace.repository";
 
@@ -21,4 +23,14 @@ export async function getWorkspaceByIdService(
 ) {
   const workspace = await findWorkSpcaceByIdAndUserId(workspaceId, userId);
   return workspace;
+}
+
+export async function deleteWorkspaceByIdService(workspaceId: string, userId: string) {
+  const workspace = await deleteWorkspaceById(workspaceId, userId);
+  return workspace;
+}
+
+export async function updateWorkspaceByIdservice(workspaceId: string, input: Workspace, userId: string) {
+    const updateWorkspace = await updateWorkspaceById(workspaceId, input);
+    return updateWorkspace;
 }

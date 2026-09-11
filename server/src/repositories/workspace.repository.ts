@@ -27,6 +27,6 @@ export async function updateWorkspaceById(workspaceId: string, data: Workspace){
     return await db.update(workspace).set(data).where(eq(workspace.id, workspaceId));
 }
 
-export async function deleteWorkspaceById(workspaceId: string){
-    return await db.delete(workspace).where(eq(workspace.id, workspaceId));
+export async function deleteWorkspaceById(workspaceId: string, userId: string){
+    return await db.delete(workspace).where(eq(workspace.id, workspaceId) && eq(workspace.userId, userId));
 }

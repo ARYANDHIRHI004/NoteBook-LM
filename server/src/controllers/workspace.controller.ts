@@ -1,7 +1,12 @@
 import type { Request, Response } from "express";
-import { createWorkspace, getAllWorkspacesByUserIdService, getWorkspaceByIdService } from "../services/workspace.service.js";
+import {
+  createWorkspace,
+  deleteWorkspaceByIdService,
+  getAllWorkspacesByUserIdService,
+  getWorkspaceByIdService,
+  updateWorkspaceByIdservice,
+} from "../services/workspace.service.js";
 import { UnauthorizedError } from "../utils/api.error.js";
-import { Workspace } from "../repositories/workspace.repository.js";
 
 export async function createWorkspaceForUser(req: Request, res: Response) {
   const data = req.body;
@@ -25,17 +30,47 @@ export async function getAllWorkspacesByUserId(req: Request, res: Response) {
 
   const workspaces = await getAllWorkspacesByUserIdService(userId);
 
-  return res.status(200).json(workspaces);``
+  return res.status(200).json(workspaces);
+  ``;
 }
 
-export async function getWorkspaceById(req: Request, res: Response){
-    const userId = req.session?.user.id
-    const {workspaceId} = req.params
+export async function getWorkspaceById(req: Request, res: Response) {
+  const userId = req.session?.user.id;
+  const { workspaceId } = req.params;
 
-    if (!userId) {
-        throw new UnauthorizedError("Unauthorized");
-      }
+  if (!userId) {
+    throw new UnauthorizedError("Unauthorized");
+  }
 
-    const workspace = getWorkspaceByIdService(workspaceId as string, userId);
+  const workspace = getWorkspaceByIdService(workspaceId as string, userId);
+}
 
+export async function deleteWorkspaceById(req: Request, res: Response) {
+  const userId = req.session?.user.id;
+  const { workspaceId } = req.params;
+
+  if (!userId) {
+    throw new UnauthorizedError("Unauthorized");
+  }
+
+  const workspace = deleteWorkspaceByIdService(workspaceId as string, userId);
+
+  return res.status(200).json(workspace);
+}
+
+export async function updateWorkspaceById(req: Request, res: Response) {
+  const userId = req.session?.user.id;
+  const { workspaceId } = req.params;
+  const input = req.body;
+
+  if (!userId) {
+    throw new UnauthorizedError("Unauthorized");
+  }
+
+  const updateWorkspace = await updateWorkspaceByIdservice(
+    workspaceId as string,
+    input,
+    userId,
+  );
+  return res.status(200).json(updateWorkspace);
 }
