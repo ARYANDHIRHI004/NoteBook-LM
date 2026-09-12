@@ -92,4 +92,3 @@ export const accountRelations = relations(account, ({ one }) => ({
   }),
 }));
 
-export * as schema from "./auth-schema";

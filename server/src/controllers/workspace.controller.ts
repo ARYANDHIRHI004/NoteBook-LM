@@ -16,6 +16,8 @@ export async function createWorkspaceForUser(req: Request, res: Response) {
     throw new UnauthorizedError("Unauthorized");
   }
 
+  console.log(data)
+
   const workspace = await createWorkspace(data, userId);
 
   return res.status(201).json(workspace);
@@ -42,7 +44,8 @@ export async function getWorkspaceById(req: Request, res: Response) {
     throw new UnauthorizedError("Unauthorized");
   }
 
-  const workspace = getWorkspaceByIdService(workspaceId as string, userId);
+  const workspace = await getWorkspaceByIdService(workspaceId as string, userId);
+  return res.status(200).json(workspace);
 }
 
 export async function deleteWorkspaceById(req: Request, res: Response) {
@@ -53,7 +56,7 @@ export async function deleteWorkspaceById(req: Request, res: Response) {
     throw new UnauthorizedError("Unauthorized");
   }
 
-  const workspace = deleteWorkspaceByIdService(workspaceId as string, userId);
+  const workspace = await deleteWorkspaceByIdService(workspaceId as string, userId);
 
   return res.status(200).json(workspace);
 }

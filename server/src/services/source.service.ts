@@ -1,12 +1,17 @@
 import { extractPdfFromBuffer } from "../lib/pdf.js";
 import { enqueueSourceProcessing } from "../lib/source-event.js";
-import { createSourceRecord } from "../repositories/source.repository.js";
+import {
+  createSourceRecord,
+  listSourcesByWorkspaceId,
+  deleteSourceById,
+} from "../repositories/source.repository.js";
 import { getWorkspaceByIdService } from "./workspace.service.js";
 
 
 async function createAndProcessSource(
     data: Parameters<typeof createSourceRecord>[0],
 ) {
+    console.log(data)
     const source = await createSourceRecord(data);
 
     await enqueueSourceProcessing({
@@ -58,4 +63,18 @@ export async function uploadPdfSource(
             pageCount,
         },
     });
+}
+
+export async function listSourcesService(workspaceId: string, userId: string) {
+    await getWorkspaceByIdService(workspaceId, userId);
+    return listSourcesByWorkspaceId(workspaceId);
+}
+
+export async function deleteSourceService(
+    sourceId: string,
+    workspaceId: string,
+    userId: string,
+) {
+    await getWorkspaceByIdService(workspaceId, userId);
+    return deleteSourceById(sourceId, workspaceId);
 }

@@ -71,6 +71,27 @@
       "when": 1789128506465,
       "tag": "0009_complex_lionheart",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1789195205249,
+      "tag": "0010_square_salo",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1789196725283,
+      "tag": "0011_overconfident_bishop",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1789197747450,
+      "tag": "0012_gorgeous_komodo",
+      "breakpoints": true
     }
   ]
 }

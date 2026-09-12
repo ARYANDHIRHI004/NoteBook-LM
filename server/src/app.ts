@@ -5,8 +5,15 @@ import { registerRoute } from "./routes/index.js";
 import { serve } from "inngest/express";
 import { inngest } from "./inngest/client.js";
 import { functions } from "./inngest/functions/index.js";
-
+import cors from "cors";
 const app = express();
+
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}))
 
 app.get("/api/auth/{*any}", toNodeHandler(auth));
 app.post("/api/auth/{*any}", toNodeHandler(auth));

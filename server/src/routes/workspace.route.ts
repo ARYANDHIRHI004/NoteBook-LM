@@ -9,5 +9,5 @@ workSpaceRoute.use(requireAuth);
 workSpaceRoute.route("/create-workspace").post(createWorkspaceForUser);
 workSpaceRoute.route("/get-all-workspaces-by-userId").get(getAllWorkspacesByUserId);
 workSpaceRoute.route("/get-workspace-by-id/:workspaceId").get(getWorkspaceById);
-workSpaceRoute.route("/delete-workspace-by-id/:workspaceId").get(deleteWorkspaceById);
-workSpaceRoute.route("/update-workspace-by-id/:workspaceId").get(updateWorkspaceById);
+workSpaceRoute.route("/delete-workspace-by-id/:workspaceId").delete(deleteWorkspaceById).get(deleteWorkspaceById);
+workSpaceRoute.route("/update-workspace-by-id/:workspaceId").put(updateWorkspaceById).patch(updateWorkspaceById).post(updateWorkspaceById).get(updateWorkspaceById);

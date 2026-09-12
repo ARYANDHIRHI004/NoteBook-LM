@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "../config/db";
 import { source } from "../models/soruce.models.js";
 
@@ -29,7 +29,8 @@ export type CreateSourceData = {
 };
 
 export async function createSourceRecord(data: CreateSourceData) {
-  return await db.insert(source).values(data);
+  const [result] = await db.insert(source).values(data).returning();
+  return result;
 }
 
 export async function findSourceContentById(
@@ -49,4 +50,25 @@ export async function updateSourceRecord(
   data: Partial<CreateSourceData>,
 ) {
   return await db.update(source).set(data).where(eq(source.id, sourceId));
+}
+
+export async function listSourcesByWorkspaceId(
+  workspaceId: string,
+): Promise<SourceRecord[]> {
+  return await db
+    .select()
+    .from(source)
+    .where(eq(source.workspaceId, workspaceId))
+    .orderBy(source.createdAt);
+}
+
+export async function deleteSourceById(
+  sourceId: string,
+  workspaceId: string,
+): Promise<SourceRecord | undefined> {
+  const [deleted] = await db
+    .delete(source)
+    .where(and(eq(source.id, sourceId), eq(source.workspaceId, workspaceId)))
+    .returning();
+  return deleted;
 }

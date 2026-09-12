@@ -6,8 +6,8 @@ import { json } from "drizzle-orm/pg-core";
 import { jsonb } from "drizzle-orm/pg-core";
 
 export const sourceChunk = pgTable("source-chunk", {
-     id: uuid("id").primaryKey().defaultRandom(),
-    sourceId: text("source_id").notNull().references(() => source.id, { onDelete: "cascade" }),
+    id: uuid("id").primaryKey().defaultRandom(),
+    sourceId: text("sourceId").notNull().references(() => source.id, { onDelete: "cascade" }),
     index: integer("index").notNull(), 
     content: text("content"),
     tokenTount: integer("token_tount"),

@@ -30,7 +30,7 @@ export async function deleteWorkspaceByIdService(workspaceId: string, userId: st
   return workspace;
 }
 
-export async function updateWorkspaceByIdservice(workspaceId: string, input: Workspace, userId: string) {
-    const updateWorkspace = await updateWorkspaceById(workspaceId, input);
+export async function updateWorkspaceByIdservice(workspaceId: string, input: Partial<Workspace>, userId: string) {
+    const updateWorkspace = await updateWorkspaceById(workspaceId, input, userId);
     return updateWorkspace;
 }

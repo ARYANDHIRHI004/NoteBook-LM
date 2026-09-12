@@ -12,7 +12,7 @@ export const sourceType = pgEnum("type", ["pdf", "website", "youtube", "text", "
 
 export const source = pgTable("source", {
     id: uuid("id").primaryKey().defaultRandom(),
-    workspaceId: text("workspace_id").notNull().references(() => workspace.id, { onDelete: "cascade" }),
+    workspaceId: text("workspaceId").notNull().references(() => workspace.id, { onDelete: "cascade" }),
     type: sourceType("type").notNull(),
     title: text("title").notNull(),
     content: text("content"),
